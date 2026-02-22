@@ -175,25 +175,27 @@ app.get("/", (req, res) => {
         top: 20px;
         right: 20px;
         z-index: 1000;
-        background: #7289da;
-        border-radius: 50%;
+        background: #202437;
+        border: 1px solid #2f3445;
+        border-radius: 10px;
         width: 50px;
         height: 50px;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 12px rgba(0,0,0,.15);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.22);
         cursor: pointer;
-        transition: transform 0.2s ease, background 0.2s ease;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
         border: none;
         font-size: 24px;
       }
       .discord-float:hover {
-        transform: scale(1.1);
-        background: #677bc4;
+        transform: translateY(-1px);
+        box-shadow: 0 5px 16px rgba(88, 101, 242, 0.35);
       }
       .discord-float:active {
-        transform: scale(0.95);
+        transform: none;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.22);
       }
       :root {
         --bg: #0b1020;
@@ -338,9 +340,11 @@ app.get("/", (req, res) => {
   </head>
   <body>
     <button class="discord-float" onclick="openDiscordInvite()" title="Join our Discord server">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
-        <path d="M14.82 4.26a10.14 10.14 0 0 0-.53 1.1a14.66 14.66 0 0 0-4.58 0a10.14 10.14 0 0 0-.53-1.1a16 16 0 0 0-4.13 1.32a17.33 17.33 0 0 0 1.6 19.69a16.44 16.44 0 0 0 9.04 0a17.19 17.19 0 0 0 1.6-19.69a16 16 0 0 0-4.13-1.32zM8.5 15.35a1.83 1.83 0 0 1-1.5-1.82a1.82 1.82 0 0 1 1.5-1.81a1.82 1.82 0 0 1 1.5 1.81a1.82 1.82 0 0 1-1.5 1.82zm6.8 0a1.83 1.83 0 0 1-1.5-1.82a1.82 1.82 0 0 1 1.5-1.81a1.82 1.82 0 0 1 1.5 1.81a1.82 1.82 0 0 1-1.5 1.82z"/>
-      </svg>
+      <span style="display: flex; align-items: center; justify-content: center; background: #5865F2; border-radius: 8px; width: 30px; height: 30px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path fill="#FFFFFF" d="M20.317 4.369A19.791 19.791 0 0 0 16.558 3a14.221 14.221 0 0 0-.671 1.361 18.626 18.626 0 0 0-5.773 0A14.134 14.134 0 0 0 9.444 3a19.736 19.736 0 0 0-3.76 1.379c-2.37 3.443-3.02 6.8-2.693 10.113A19.912 19.912 0 0 0 8.27 17.45a14.578 14.578 0 0 0 1.2-1.946 12.9 12.9 0 0 1-1.889-.9c.16-.115.316-.234.467-.356 3.637 1.696 7.57 1.696 11.183 0 .152.123.309.242.467.356-.6.364-1.237.664-1.888.9.352.682.763 1.332 1.2 1.946a19.8 19.8 0 0 0 5.277-2.958c.433-4.476-.76-7.807-2.97-10.123ZM8.62 13.773c-1.092 0-1.988-1.006-1.988-2.248s.87-2.248 1.988-2.248c.113 0 2 .986 2 2.248 0 1.242-.882 2.248-2 2.248Zm6.76 0c-1.093 0-1.989-1.006-1.989-2.248s.87-2.248 1.989-2.248c1.13 0 2 .986 2 2.248-.01 1.242-.882 2.248-2 2.248Z"/>
+        </svg>
+      </span>
     </button>
     <div class="wrap">
       <div class="header">
