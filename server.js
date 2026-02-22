@@ -329,8 +329,8 @@ app.get("/", (req, res) => {
           <h2>Choose your plan</h2>
           <p>Enter the email you use to login in the TikHub app, then choose a plan.</p>
 
-          <label>Account email</label>
-          <input id="appEmail" type="email" placeholder="you@example.com" autocomplete="email" />
+          <label>Account email *</label>
+          <input id="appEmail" type="email" placeholder="your-tiktok-email@example.com (required)" autocomplete="email" />
           <div id="emailError" class="fieldError">Please enter your account email to continue.</div>
 
           <div class="plans">
@@ -374,6 +374,7 @@ app.get("/", (req, res) => {
           <div class="summaryRow"><span>Total</span><strong id="summaryTotal">$19.99 USD</strong></div>
           <div class="divider"></div>
           <div id="paypal-button-container"></div>
+          <div id="paypal-disabled-hint" style="display:none; margin-top: 10px; text-align: center; color: #f87171; font-weight: bold;">⚠️ Please enter your email first</div>
           <div class="ctaHint">You can pay with PayPal balance or card (PayPal checkout).</div>
           <div class="ctaHint" style="margin-top: 12px; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255,215,0,.35); background: rgba(255,215,0,.08); color: rgba(255,223,0,.95);">
             💡 <strong>Alternative Payment Methods:</strong> If you'd like to use a different payment method (crypto, bank transfer, etc.), join our Discord server and contact support.
@@ -446,13 +447,18 @@ app.get("/", (req, res) => {
 
       function setEmailError(message) {
         if (!emailEl || !emailErrorEl) return;
+        const paypalDisabledHint = document.getElementById('paypal-disabled-hint');
         if (message) {
           emailEl.classList.add('inputError');
-          emailErrorEl.textContent = message;
+          emailErrorEl.innerHTML = message;
           emailErrorEl.style.display = 'block';
+          emailErrorEl.style.fontWeight = 'bold';
+          emailErrorEl.style.color = '#f87171';
+          if (paypalDisabledHint) paypalDisabledHint.style.display = 'block';
         } else {
           emailEl.classList.remove('inputError');
           emailErrorEl.style.display = 'none';
+          if (paypalDisabledHint) paypalDisabledHint.style.display = 'none';
         }
       }
 
@@ -462,13 +468,17 @@ app.get("/", (req, res) => {
 
       paypal.Buttons({
         onInit: (data, actions) => {
+          const paypalDisabledHint = document.getElementById('paypal-disabled-hint');
+          
           const update = () => {
             const emailOk = isValidEmail(emailEl?.value || '');
             if (emailOk) {
               setEmailError('');
               actions.enable();
+              if (paypalDisabledHint) paypalDisabledHint.style.display = 'none';
             } else {
               actions.disable();
+              if (paypalDisabledHint) paypalDisabledHint.style.display = 'block';
             }
           };
 
@@ -478,7 +488,7 @@ app.get("/", (req, res) => {
             emailEl.addEventListener('input', update);
             emailEl.addEventListener('blur', () => {
               if (!isValidEmail(emailEl.value || '')) {
-                setEmailError('Please enter your account email to continue.');
+                setEmailError('⚠️ Please enter your account email to continue.');
               } else {
                 setEmailError('');
               }
@@ -489,7 +499,7 @@ app.get("/", (req, res) => {
           const email = (emailEl?.value || '').trim();
           const tier = tierEl.value;
           if (!isValidEmail(email)) {
-            setEmailError('Please enter your account email to continue.');
+            setEmailError('⚠️ Please enter your account email to continue.');
             emailEl?.focus();
             throw new Error('Missing email');
           }
