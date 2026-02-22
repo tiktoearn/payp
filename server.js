@@ -338,7 +338,9 @@ app.get("/", (req, res) => {
   </head>
   <body>
     <button class="discord-float" onclick="openDiscordInvite()" title="Join our Discord server">
-      ðŸ’¬
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+        <path d="M14.82 4.26a10.14 10.14 0 0 0-.53 1.1a14.66 14.66 0 0 0-4.58 0a10.14 10.14 0 0 0-.53-1.1a16 16 0 0 0-4.13 1.32a17.33 17.33 0 0 0 1.6 19.69a16.44 16.44 0 0 0 9.04 0a17.19 17.19 0 0 0 1.6-19.69a16 16 0 0 0-4.13-1.32zM8.5 15.35a1.83 1.83 0 0 1-1.5-1.82a1.82 1.82 0 0 1 1.5-1.81a1.82 1.82 0 0 1 1.5 1.81a1.82 1.82 0 0 1-1.5 1.82zm6.8 0a1.83 1.83 0 0 1-1.5-1.82a1.82 1.82 0 0 1 1.5-1.81a1.82 1.82 0 0 1 1.5 1.81a1.82 1.82 0 0 1-1.5 1.82z"/>
+      </svg>
     </button>
     <div class="wrap">
       <div class="header">
