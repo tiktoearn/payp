@@ -170,6 +170,31 @@ app.get("/", (req, res) => {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>TikHub Subscription</title>
     <style>
+      .discord-float {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        background: #7289da;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,.15);
+        cursor: pointer;
+        transition: transform 0.2s ease, background 0.2s ease;
+        border: none;
+        font-size: 24px;
+      }
+      .discord-float:hover {
+        transform: scale(1.1);
+        background: #677bc4;
+      }
+      .discord-float:active {
+        transform: scale(0.95);
+      }
       :root {
         --bg: #0b1020;
         --card: rgba(255,255,255,.06);
@@ -312,6 +337,9 @@ app.get("/", (req, res) => {
     </style>
   </head>
   <body>
+    <button class="discord-float" onclick="openDiscordInvite()" title="Join our Discord server">
+      ðŸ’¬
+    </button>
     <div class="wrap">
       <div class="header">
         <div class="brand">
