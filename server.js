@@ -753,7 +753,14 @@ app.post("/paypal-webhook", (req, res) => {
 
   // Tier activation logic
   if (parsedCustomId && parsedCustomId.email && parsedCustomId.tier) {
-    const { email, tier } = parsedCustomId;
+    let { email, tier } = parsedCustomId;
+    
+    // Map "basic" tier (for $1 Basic Pro) to "pro" tier as per marketing strategy
+    if (tier.toLowerCase() === 'basic') {
+      console.log(`🔄 Converting tier from "basic" to "pro" for ${email}`);
+      tier = 'pro';
+    }
+    
     console.log(`🚀 Activating tier: ${email} -> ${tier}`);
 
     const transactionId =
