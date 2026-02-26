@@ -106,6 +106,7 @@ async function updateTierInTikHubCloud(email, tier, eventId) {
     throw new Error('Missing TIKHUB_CLOUD_ADMIN_KEY');
   }
 
+  // First update the subscription in the database
   const res = await fetch(`${cloudApiUrl}/admin/set-tier-by-email`, {
     method: 'POST',
     headers: {
@@ -123,6 +124,26 @@ async function updateTierInTikHubCloud(email, tier, eventId) {
     throw new Error(
       `TikHub Cloud API error (${res.status}): ${typeof data === 'string' ? data : JSON.stringify(data)}`
     );
+  }
+
+  // Now trigger WebSocket broadcast for real-time update
+  try {
+    const broadcastRes = await fetch(`${cloudApiUrl}/admin/broadcast-subscription-update`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Admin-Key': adminKey,
+      },
+      body: JSON.stringify({ email, tier, eventId }),
+    });
+    
+    if (broadcastRes.ok) {
+      console.log(`✅ WebSocket broadcast triggered for ${email}: ${tier}`);
+    } else {
+      console.warn(`⚠️ WebSocket broadcast failed for ${email}: ${broadcastRes.status}`);
+    }
+  } catch (broadcastError) {
+    console.warn(`⚠️ Failed to trigger WebSocket broadcast:`, broadcastError.message);
   }
 
   return data;
