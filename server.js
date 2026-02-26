@@ -390,17 +390,6 @@ app.get("/", (req, res) => {
           <div id="emailError" class="fieldError">Please enter your account email to continue.</div>
 
           <div class="plans">
-            <div class="plan selected" data-tier="basic" data-price="1.00">
-              <div class="planTop">
-                <div class="planName">Basic Pro</div>
-                <div class="price">$1.00<span class="per">USD</span></div>
-              </div>
-              <ul class="features">
-                <li>Unlock Pro tier features</li>
-                <li>Basic access to premium games</li>
-                <li>Perfect for trying the service</li>
-              </ul>
-            </div>
             <div class="plan" data-tier="pro" data-price="19.99">
               <div class="planTop">
                 <div class="planName">Pro</div>
@@ -425,7 +414,7 @@ app.get("/", (req, res) => {
             </div>
           </div>
 
-          <input id="tier" type="hidden" value="basic" />
+          <input id="tier" type="hidden" value="pro" />
 
           <div class="ctaHint">After payment, it can take a few minutes for your tier to update. Please restart the Tiktoearn app to refresh your access. If it still doesn’t update after some time, message us in the Discord server.</div>
           <div class="ctaHint" style="margin-top: 12px; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255,215,0,.35); background: rgba(255,215,0,.08); color: rgba(255,223,0,.95);">
